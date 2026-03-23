@@ -1,0 +1,7 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="ECom.API/ECom.API.csproj" />
+    <Project Path="ECom.Core/ECom.Core.csproj" />
+    <Project Path="ECom.infrastrucrure/ECom.infrastrucrure.csproj" />
+  </Folder>
+</Solution>
