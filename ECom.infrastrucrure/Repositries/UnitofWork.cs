@@ -10,9 +10,9 @@ namespace ECom.infrastrucrure.Repositries
 {
     public  class UnitofWork : IUnitofWork
     {
-        public IProductRepository productRepository { get; private set; }
-        public ICategoryRepository categoryRepository { get; private set; }
-        public IPhotosRepository photosRepository { get; private set; }
+        public IProductRepository ProductRepository { get; private set; }
+        public ICategoryRepository CategoryRepository { get; private set; }
+        public IPhotosRepository PhotosRepository { get; private set; }
         public AppDbContext DbContext { get; }
 
 
@@ -20,9 +20,9 @@ namespace ECom.infrastrucrure.Repositries
 
         public UnitofWork(AppDbContext dbContext)
         {
-            productRepository = new ProductRepository(dbContext);
-            categoryRepository = new CategortRepository(dbContext);
-            photosRepository = new PhotoRepository(dbContext);
+            ProductRepository = new ProductRepository(dbContext);
+            CategoryRepository = new CategortRepository(dbContext);
+            PhotosRepository = new PhotoRepository(dbContext);
             DbContext = dbContext;
         }
 

@@ -1,4 +1,7 @@
+using ECom.Core.Services;
 using ECom.infrastrucrure;
+using ECom.infrastrucrure.Repositries.Service;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -8,6 +11,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddInfrastructure(builder.Configuration); //Add infrastructure services
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddScoped<IImageManegmentService, ImageManegmentService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

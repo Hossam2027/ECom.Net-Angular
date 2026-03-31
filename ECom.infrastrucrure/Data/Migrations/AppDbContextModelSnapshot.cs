@@ -94,8 +94,11 @@ namespace ECom.infrastrucrure.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<decimal>("Price")
+                    b.Property<decimal>("NewPrice")
                         .HasPrecision(18, 2)
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("OldPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
@@ -111,7 +114,8 @@ namespace ECom.infrastrucrure.Data.Migrations
                             CategoryId = 1,
                             Description = "Description for Product 1",
                             Name = "Product 1",
-                            Price = 9.99m
+                            NewPrice = 9.99m,
+                            OldPrice = 0m
                         });
                 });
 

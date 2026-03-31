@@ -16,8 +16,8 @@ namespace ECom.Core.Interface
         Task<T> GetByIdAsync(int id);
        Task <T> GetByIdAsync(int id, params Expression<Func<T, object>>[] include);
         //GetAll
-       Task< IReadOnlyList <T>> GetAll();
-        Task<IReadOnlyList<T>> GetAll(params Expression<Func<T, object>>[] include);
+       Task< IReadOnlyList <T>> GetAllAsync();
+        Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] include);
 
     }
 }

@@ -37,12 +37,12 @@ namespace ECom.infrastrucrure.Repositries
 
         }
 
-        public async Task<IReadOnlyList<T>> GetAll()
+        public async Task<IReadOnlyList<T>> GetAllAsync()
         {
             return await AppDbContext.Set<T>().AsNoTracking().ToListAsync();
         }
 
-        public async Task<IReadOnlyList<T>> GetAll(params Expression<Func<T, object>>[] include)
+        public async Task<IReadOnlyList<T>> GetAllAsync(params Expression<Func<T, object>>[] include)
         {
             IQueryable<T> query = AppDbContext.Set<T>();
            

@@ -15,14 +15,14 @@ namespace ECom.infrastrucrure.Data.Config
         {
             builder.Property(x => x.Name).IsRequired().HasMaxLength(30);
             builder.Property(x => x.Description).IsRequired().HasMaxLength(200);
-             builder.Property(x => x.Price).IsRequired().HasPrecision(18, 2);
+             builder.Property(x => x.NewPrice).IsRequired().HasPrecision(18, 2);
             builder.HasData(
                 new Product
                 {
                     Id = 1,
                     Name = "Product 1",
                     Description = "Description for Product 1",
-                    Price = 9.99m,
+                    NewPrice = 9.99m,
                     CategoryId = 1
                 
                 }
