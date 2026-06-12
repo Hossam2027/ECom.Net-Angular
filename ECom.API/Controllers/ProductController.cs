@@ -3,12 +3,12 @@ using ECom.Core.DTO;
 using ECom.Core.Entites.Product;
 using ECom.Core.Interface;
 using ECom.Core.Services;
+using ECom.Core.Sharing;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace ECom.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
+   
     public class ProductController : BaseController
     {
         public IImageManegmentService ImageService { get; }
@@ -18,15 +18,14 @@ namespace ECom.API.Controllers
             ImageService = imageService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("getall")]
+        public async Task<IActionResult> Get([FromQuery]ProductParams productParams)
         {
-            var products = await UnitofWork.ProductRepository.GetAllAsync(p => p.Category,
-                p => p.Photos);
+            var products = await UnitofWork.ProductRepository.GetAllAsync(productParams);
 
-            var result = Mapper.Map<IEnumerable<ProductDTO>>(products);
+            //var result = Mapper.Map<IEnumerable<ProductDTO>>(products);
 
-            return Ok(result);
+            return Ok(products);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
@@ -78,9 +77,18 @@ namespace ECom.API.Controllers
             product.OldPrice = addProductDTO.OldPrice;
             product.CategoryId = addProductDTO.CategoryId;
 
-            foreach (var photo in product.Photos)
+            //foreach (var photo in product.Photos)
+            //{
+            //    await ImageService.DeleteImageAsync(photo.ImageName);
+            //}
+            if (addProductDTO.Images != null && addProductDTO.Images.Count > 0)
             {
-                await ImageService.DeleteImageAsync(photo.ImageName);
+                foreach (var photo in product.Photos)
+                {
+                    await ImageService.DeleteImageAsync(photo.ImageName);
+                }
+
+               
             }
 
             var imageNames = await ImageService.AddImageAsync(addProductDTO.Images, "wwwroot/images/products");

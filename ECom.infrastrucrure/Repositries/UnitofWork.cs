@@ -1,5 +1,9 @@
-﻿using ECom.Core.Interface;
+﻿using AutoMapper;
+using ECom.Core.Entites;
+using ECom.Core.Interface;
+using ECom.Core.Services;
 using ECom.infrastrucrure.Data;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +17,22 @@ namespace ECom.infrastrucrure.Repositries
         public IProductRepository ProductRepository { get; private set; }
         public ICategoryRepository CategoryRepository { get; private set; }
         public IPhotosRepository PhotosRepository { get; private set; }
+        public IcustomerBasketRepository CustomerBasketRepository { get; }
+
         public AppDbContext DbContext { get; }
+        public IMapper Mapper { get; }
 
 
-
-
-        public UnitofWork(AppDbContext dbContext)
+        public UnitofWork(AppDbContext dbContext ,IMapper mapper ,
+            IImageManegmentService imageManegmentService , 
+            IConnectionMultiplexer redis)
         {
-            ProductRepository = new ProductRepository(dbContext);
+            ProductRepository = new ProductRepository(dbContext , mapper);
             CategoryRepository = new CategortRepository(dbContext);
             PhotosRepository = new PhotoRepository(dbContext);
+            CustomerBasketRepository = new CustomBasketRepository(redis);
             DbContext = dbContext;
+            Mapper = mapper;
         }
 
     }

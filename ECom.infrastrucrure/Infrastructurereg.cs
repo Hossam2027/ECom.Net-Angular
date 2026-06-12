@@ -1,10 +1,13 @@
 ﻿using ECom.Core.Interface;
+using ECom.Core.Services;
 using ECom.infrastrucrure.Data;
 using ECom.infrastrucrure.Repositries;
+using ECom.infrastrucrure.Repositries.Service;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +25,18 @@ namespace ECom.infrastrucrure
                 options.UseSqlServer(configuration.GetConnectionString("CS"));
             });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenRepository<>));
-           
+            //apply redis connection 
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var configurationOptions = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"), true);
+                return ConnectionMultiplexer.Connect(configurationOptions);
+            });
+
+            services.AddScoped<IEmailService, EmailService>();
+
             services.AddScoped<IUnitofWork, UnitofWork>();
+            services.AddScoped<IOrderServices, OrderServices>();
+
             return services;
         }
     }

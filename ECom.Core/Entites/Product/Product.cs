@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace ECom.Core.Entites.Product
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal NewPrice { get; set; }
+        //[Precision(18, 2)]
         public decimal OldPrice { get; set; }
         public virtual List<Photo> Photos { get; set; }
 
