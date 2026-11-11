@@ -22,8 +22,10 @@ namespace ECom.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            //register the payment service
+            builder.Services.AddScoped<IPaymentServices, PaymentServices>();
+            //builder.Services.AddScoped<IUnitofWork, IUnitofWork>();
             //builder.Services.AddSwaggerGen();
-
             builder.Services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo
@@ -67,10 +69,13 @@ namespace ECom.API
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
             builder.Services.AddCors(op => op.AddPolicy("allowcors",
-                policy => policy.WithOrigins("http://localhost:4200") //Angular
+                policy => policy.WithOrigins("http://localhost:4200",
+                                "http://hossamangular.runasp.net"
+
+                ) //Angular
                     .AllowCredentials() //JWT
                     .AllowAnyHeader() //Allow any header
-                    .WithOrigins("http://localhost:4200")
+                    //.WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
@@ -100,11 +105,13 @@ namespace ECom.API
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
-            {
-                app.UseSwagger();
-                app.UseSwaggerUI();
-            }
+            //if (app.Environment.IsDevelopment())
+            //{
+            //    app.UseSwagger();
+            //    app.UseSwaggerUI();
+            //}
+            app.UseSwagger();
+            app.UseSwaggerUI();
             app.UseCors("allowcors");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
@@ -113,7 +120,7 @@ namespace ECom.API
             app.UseAuthorization();
 
             app.MapControllers();
-
+            app.MapGet("/test", () => "Application is running");
             app.Run();
         }
     }

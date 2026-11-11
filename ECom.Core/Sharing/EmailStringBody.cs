@@ -15,7 +15,7 @@ namespace ECom.Core.Sharing
             {
                 string encodetoken = Uri.EscapeDataString(token);
 
-                var url = $"http://localhost:4200/{component}?email={email}&code={encodetoken}";
+                var url = $"http://hossamangular.runasp.net/{component}?email={email}&code={encodetoken}";
 
                 return $@"
             <html>

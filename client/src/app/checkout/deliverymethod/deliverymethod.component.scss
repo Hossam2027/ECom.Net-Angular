@@ -1,0 +1,50 @@
+.delivery-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.delivery-card {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 12px;
+  border: 1px solid #e0e0e0;
+}
+
+.delivery-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.delivery-card.selected {
+  border: 2px solid #3f51b5;
+}
+
+.delivery-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-left: 12px;
+}
+
+.delivery-content h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.delivery-content p {
+  margin: 4px 0;
+  color: #666;
+}
+
+.delivery-content small {
+  color: #999;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: bold;
+  color: #3f51b5;
+}

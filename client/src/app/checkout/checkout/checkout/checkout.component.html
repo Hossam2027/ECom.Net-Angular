@@ -1,0 +1,19 @@
+<div class="checkout-container container py-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="checkout-card">
+        <app-stepper></app-stepper>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="summary-card">
+       <app-order-total
+  [basket]="basket"
+  [shippingPrice]="shippingPrice"
+  [showCheckoutButton]="false">
+</app-order-total>
+      </div>
+    </div>
+  </div>
+</div>

@@ -101,18 +101,46 @@ namespace ECom.API.Controllers
             var productDTOResponse = Mapper.Map<ProductDTO>(updatedProduct);
             return Ok(productDTOResponse);
         }
+
+        //[HttpDelete("{id}")]
+        //public async Task<IActionResult> Delete(int id)
+        //{
+        //    var product = await UnitofWork.ProductRepository.GetByIdAsync(id , x=>x.Category , x=>x.Photos);
+        //    if (product == null)
+        //        return NotFound($"Product with id {id} not found.");
+        //    foreach (var photo in product.Photos)
+        //    {
+        //      await  ImageService.DeleteImageAsync(photo.ImageName);
+        //    }
+        //   await UnitofWork.ProductRepository.DeleteAsync(id);
+        //    return Ok("deleted");
+        //}
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var product = await UnitofWork.ProductRepository.GetByIdAsync(id , x=>x.Category , x=>x.Photos);
-            if (product == null)
-                return NotFound($"Product with id {id} not found.");
-            foreach (var photo in product.Photos)
+            try
             {
-              await  ImageService.DeleteImageAsync(photo.ImageName);
+                var product = await UnitofWork.ProductRepository.GetByIdAsync(
+                    id,
+                    x => x.Category,
+                    x => x.Photos);
+
+                if (product == null)
+                    return NotFound($"Product with id {id} not found.");
+
+                foreach (var photo in product.Photos)
+                {
+                    await ImageService.DeleteImageAsync(photo.ImageName);
+                }
+
+                await UnitofWork.ProductRepository.DeleteAsync(id);
+
+                return Ok("deleted");
             }
-           await UnitofWork.ProductRepository.DeleteAsync(id);
-            return Ok("deleted");
+            catch (Exception ex)
+            {
+                return BadRequest(ex.InnerException?.Message ?? ex.Message);
+            }
         }
     }
 }

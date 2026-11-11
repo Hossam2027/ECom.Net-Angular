@@ -1,0 +1,115 @@
+<div class="basket-wrapper" *ngIf="basket$ | async as basket">
+
+  <!-- ===== Header ===== -->
+  <div class="basket-header">
+    <h2 class="basket-title">
+      <span class="basket-icon">🛒</span>
+      Your Basket
+      <span class="item-count" *ngIf="basket.items.length">
+        {{ basket.items.length }} {{ basket.items.length === 1 ? 'item' : 'items' }}
+      </span>
+    </h2>
+  </div>
+
+  <!-- ===== Empty State ===== -->
+  <div class="empty-state" *ngIf="!basket.items.length">
+    <div class="empty-icon">🛍️</div>
+    <h4 class="empty-title">Your basket is empty</h4>
+    <p class="empty-subtitle">Add some products to get started</p>
+  </div>
+
+  <!-- ===== Basket Items + Summary ===== -->
+  <div class="basket-layout" *ngIf="basket.items.length">
+
+    <!-- Items List -->
+    <div class="basket-items">
+
+      <div class="basket-card" *ngFor="let item of basket.items">
+
+        <!-- Product Image -->
+        <div class="product-image-wrap">
+          <img
+            [src]="'http://hossammohammed.runasp.net/images/products/' + item.imageUrl"
+            [alt]="item.name"
+            class="product-image"
+          />
+        </div>
+
+        <!-- Product Info -->
+        <div class="product-info">
+          <h5 class="product-name">{{ item.name }}</h5>
+          <p class="product-unit-price">{{ item.price | currency:'EGP':'symbol':'1.2-2' }} </p>
+        </div>
+
+        <!-- Quantity Controls -->
+        <div class="quantity-controls">
+          <button
+            class="qty-btn qty-btn--minus"
+            (click)="decrease(item)"
+            [disabled]="item.quantity <= 1"
+            aria-label="Decrease quantity"
+          >−</button>
+
+          <span class="qty-value">{{ item.quantity }}</span>
+
+          <button
+            class="qty-btn qty-btn--plus"
+            (click)="increase(item)"
+            aria-label="Increase quantity"
+          >+</button>
+
+        </div>
+
+        <!-- Line Total + Remove -->
+        <div class="product-total">
+          <strong class="line-price">
+            {{ item.price * item.quantity | currency:'EGP':'symbol':'1.2-2' }}
+          </strong>
+          <button class="remove-btn" (click)="removeItem(item)" [attr.aria-label]="'Remove ' + item.name">
+            🗑 Remove
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Order Summary -->
+    <!-- <aside class="order-summary">
+      <h5 class="summary-title">Order Summary</h5>
+
+      <div class="summary-row" *ngFor="let item of basket.items">
+        <span class="summary-item-name">{{ item.name }} × {{ item.quantity }}</span>
+        <span>{{ item.price * item.quantity | currency:'EGP':'symbol':'1.0-0' }}</span>
+      </div>
+
+      <div class="summary-divider"></div>
+
+      <div class="summary-total-row">
+        <span>Total</span>
+        <strong class="summary-total-value">{{ getTotal(basket) | currency:'EGP':'symbol':'1.0-0' }}</strong>
+      </div>
+
+      <button class="checkout-btn" [routerLink]="['/checkout']" [disabled]="!basket.items.length"> 
+        Proceed to Checkout →
+      </button>
+    </aside>  -->
+ <!-- <div class="order-summary-container">
+            <app-order-total></app-order-total>
+            <a routerLink="/checkout" class="btn btn-dark w-100 mt-3">
+                Proceed to checkout
+            </a>
+        </div> -->
+        <div class="order-summary-container">
+        <app-order-total
+  [basket]="basket">
+</app-order-total>
+<!-- <button
+    *ngIf="showCheckoutButton"
+    class="checkout-btn"
+    [routerLink]="['/checkout']"
+    [disabled]="!basket.items.length">
+
+    Proceed to Checkout →
+  </button> -->
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<form [formGroup]="delivery">
+
+  <mat-radio-group 
+    formControlName="deliveryMethodId"
+    class="delivery-methods">
+
+    <div 
+      *ngFor="let d of deliverys" 
+      class="delivery-card"
+      [class.selected]="delivery.get('deliveryMethodId')?.value === d.id">
+
+      <mat-radio-button [value]="d.id" class="full-width-radio">
+        
+        <div class="delivery-content">
+          <div class="delivery-info">
+            <h3>{{ d.name }}</h3>
+            <p>{{ d.description }}</p>
+            <small class="delivery-time">{{ d.deliveryTime }}</small>
+          </div>
+
+          <div class="price">
+            {{ d.price | currency:'EGP':'symbol-narrow' }}
+          </div>
+        </div>
+
+      </mat-radio-button>
+
+    </div>
+
+  </mat-radio-group>
+
+</form>
+
+<!-- Order Summary (اختياري) -->
+<div *ngIf="order" class="order-summary">
+  <h3>ملخص الطلب</h3>
+  <div *ngFor="let item of order.items" class="order-item">
+    {{ item.name }} × {{ item.quantity }} 
+    <span class="item-price">{{ (item.price * item.quantity) | currency:'EGP':'symbol-narrow' }}</span>
+  </div>
+</div>

@@ -10,7 +10,7 @@ namespace ECom.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     //[AllowAnonymous]
     public class OrdersController : ControllerBase
     {

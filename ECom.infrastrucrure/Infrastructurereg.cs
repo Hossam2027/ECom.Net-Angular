@@ -25,15 +25,25 @@ namespace ECom.infrastrucrure
                 options.UseSqlServer(configuration.GetConnectionString("CS"));
             });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenRepository<>));
-            //apply redis connection 
+            //apply redis connection
+            //services.AddSingleton<IConnectionMultiplexer>(sp =>
+            //{
+            //    var configurationOptions = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"), true);
+            //    return ConnectionMultiplexer.Connect(configurationOptions);
+            //});
             services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
-                var configurationOptions = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"), true);
-                return ConnectionMultiplexer.Connect(configurationOptions);
+                var options = ConfigurationOptions.Parse(
+                    configuration.GetConnectionString("Redis")
+                );
+
+                options.AbortOnConnectFail = false;
+                options.Ssl = true;
+
+                return ConnectionMultiplexer.Connect(options);
             });
-
             services.AddScoped<IEmailService, EmailService>();
-
+            services.AddScoped<IPaymentServices, PaymentServices>();
             services.AddScoped<IUnitofWork, UnitofWork>();
             services.AddScoped<IOrderServices, OrderServices>();
 

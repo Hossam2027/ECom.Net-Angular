@@ -23,9 +23,12 @@ namespace ECom.infrastrucrure.Repositries
         public IMapper Mapper { get; }
 
 
-        public UnitofWork(AppDbContext dbContext ,IMapper mapper ,
-            IImageManegmentService imageManegmentService , 
+        public UnitofWork(AppDbContext dbContext, IMapper mapper,
+            IImageManegmentService imageManegmentService,
             IConnectionMultiplexer redis)
+           //    public UnitofWork(AppDbContext dbContext, IMapper mapper,
+           // IImageManegmentService imageManegmentService
+           //)
         {
             ProductRepository = new ProductRepository(dbContext , mapper);
             CategoryRepository = new CategortRepository(dbContext);

@@ -10,7 +10,7 @@ namespace ECom.API.Controllers
 {
     public class CategoriesController : BaseController
     {
-        public CategoriesController(IUnitofWork unitofWork, IMapper mapper) : base(unitofWork, mapper)
+        public CategoriesController(Core.Interface.IUnitofWork unitofWork, IMapper mapper) : base(unitofWork, mapper)
         {
         }
 

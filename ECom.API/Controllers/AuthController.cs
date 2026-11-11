@@ -118,7 +118,7 @@ namespace ECom.API.Controllers
             emailDto.From = _configuration["EmailSettings:From"];
 
             await _emailService.SendEmailAsync(emailDto);
-
+            Console.WriteLine($"To: {emailDto.To}");
             return Ok(new { message = "Email sent successfully" });
         }
         [HttpPost("login")]
