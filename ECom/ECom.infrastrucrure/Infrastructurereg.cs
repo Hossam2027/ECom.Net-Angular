@@ -25,13 +25,17 @@ namespace ECom.infrastrucrure
                 options.UseSqlServer(configuration.GetConnectionString("CS"));
             });
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenRepository<>));
+<<<<<<< HEAD:ECom/ECom.infrastrucrure/Infrastructurereg.cs
 
             //apply redis connection
-            services.AddSingleton<IConnectionMultiplexer>(sp =>
-            {
-                var configurationOptions = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"), true);
-                return ConnectionMultiplexer.Connect(configurationOptions);
-            });
+=======
+            //apply redis connection
+            //services.AddSingleton<IConnectionMultiplexer>(sp =>
+            //{
+            //    var configurationOptions = ConfigurationOptions.Parse(configuration.GetConnectionString("Redis"), true);
+            //    return ConnectionMultiplexer.Connect(configurationOptions);
+            //});
+>>>>>>> 26177011e4853e73b2aea90bf005cee8b5a93346:ECom.infrastrucrure/Infrastructurereg.cs
             services.AddSingleton<IConnectionMultiplexer>(sp =>
             {
                 var options = ConfigurationOptions.Parse(
@@ -43,6 +47,20 @@ namespace ECom.infrastrucrure
 
                 return ConnectionMultiplexer.Connect(options);
             });
+<<<<<<< HEAD:ECom/ECom.infrastrucrure/Infrastructurereg.cs
+            services.AddSingleton<IConnectionMultiplexer>(sp =>
+            {
+                var options = ConfigurationOptions.Parse(
+                    configuration.GetConnectionString("Redis")
+                );
+
+                options.AbortOnConnectFail = false;
+                options.Ssl = true;
+
+                return ConnectionMultiplexer.Connect(options);
+            });
+=======
+>>>>>>> 26177011e4853e73b2aea90bf005cee8b5a93346:ECom.infrastrucrure/Infrastructurereg.cs
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IPaymentServices, PaymentServices>();
             services.AddScoped<IUnitofWork, UnitofWork>();
