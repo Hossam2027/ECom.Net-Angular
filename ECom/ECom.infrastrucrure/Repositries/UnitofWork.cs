@@ -23,20 +23,13 @@ namespace ECom.infrastrucrure.Repositries
         public IMapper Mapper { get; }
 
 
-<<<<<<< HEAD:ECom/ECom.infrastrucrure/Repositries/UnitofWork.cs
-        //public UnitofWork(AppDbContext dbContext, IMapper mapper,
-        //    IImageManegmentService imageManegmentService)
                public UnitofWork(AppDbContext dbContext, IMapper mapper,
             IImageManegmentService imageManegmentService, IConnectionMultiplexer redis
            )
-=======
-        public UnitofWork(AppDbContext dbContext, IMapper mapper,
-            IImageManegmentService imageManegmentService,
-            IConnectionMultiplexer redis)
+
            //    public UnitofWork(AppDbContext dbContext, IMapper mapper,
            // IImageManegmentService imageManegmentService
            //)
->>>>>>> 26177011e4853e73b2aea90bf005cee8b5a93346:ECom.infrastrucrure/Repositries/UnitofWork.cs
         {
             ProductRepository = new ProductRepository(dbContext , mapper);
             CategoryRepository = new CategortRepository(dbContext);

@@ -69,21 +69,10 @@ namespace ECom.API
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
             builder.Services.AddCors(op => op.AddPolicy("allowcors",
-<<<<<<< HEAD:ECom/ECom.API/Program.cs
                 policy => policy.WithOrigins(
                                 "http://localhost:4200"
                 ) //Angular
-                    .AllowCredentials() //JWT
-                    .AllowAnyHeader() //Allow any header
-=======
-                policy => policy.WithOrigins("http://localhost:4200",
-                                "http://hossamangular.runasp.net"
-
-                ) //Angular
-                    .AllowCredentials() //JWT
-                    .AllowAnyHeader() //Allow any header
-                    //.WithOrigins("http://localhost:4200")
->>>>>>> 26177011e4853e73b2aea90bf005cee8b5a93346:ECom.API/Program.cs
+                 
                 .AllowAnyHeader()
                 .AllowAnyMethod()
                 .AllowCredentials()
