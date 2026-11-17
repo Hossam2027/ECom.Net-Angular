@@ -1,0 +1,146 @@
+$primary-color: #7961ff;
+$secondary-color: #343a40;
+$background-color: #f8f9fa;
+$text-color: #212529;
+$border-radius: 0.5rem;
+$transition: 0.3s;
+$danger-color: #dc3545;
+$star-color: #ffc107;
+
+body {
+  background-color: $background-color;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.main-title {
+  font-weight: 700;
+  color: $primary-color;
+  margin-bottom: 1.5rem;
+}
+
+/* Sidebar */
+.sidebar {
+  background: white;
+  padding: 1.2rem;
+  border-radius: $border-radius;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.section-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+}
+
+.image-top {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+  display: block;
+  margin: auto;
+}
+
+.custom-list-item {
+  cursor: pointer;
+  transition: $transition;
+
+  &:hover {
+    background: $primary-color;
+    color: white;
+  }
+
+  &.active {
+    background: $primary-color;
+    color: white;
+  }
+}
+
+/* Search */
+.search-container {
+  width: 300px;
+}
+
+.search-bar .form-control {
+  border-radius: $border-radius 0 0 $border-radius;
+}
+
+.search-bar .btn-danger {
+  background: $danger-color;
+}
+
+.search-bar .btn-dark {
+  border-radius: 0 $border-radius $border-radius 0;
+}
+
+/* Card */
+.card {
+  border: none;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: $transition;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.12);
+  }
+
+  .card-img-top {
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .card-body {
+    padding: 0.9rem;
+    position: relative;
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: $primary-color;
+    }
+
+    .card-text {
+      font-size: 0.85rem;
+      color: #666;
+    }
+
+    .price {
+      font-weight: bold;
+
+      .old-price {
+        color: #999;
+        text-decoration: line-through;
+        color: $danger-color;
+        margin-right: 5px;
+      }
+    }
+
+    .rating span {
+      color: $star-color;
+    }
+
+    .favorite-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      border: none;
+      background: none;
+      font-size: 1.2rem;
+      color: #ccc;
+      cursor: pointer;
+
+      &:hover {
+        color: red;
+      }
+    }
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-container {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

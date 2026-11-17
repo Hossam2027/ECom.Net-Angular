@@ -1,0 +1,65 @@
+<div class="container-fluid mt-5 px-4">
+
+    <div class="card h-100">
+
+        <!-- Product Image -->
+         
+  <img *ngIf="product?.photos?.length"
+     [src]="'https://localhost:44344/images/products/' + product.photos[0].imageName"
+        alt="{{ product.name }}" class="card-img-top" 
+        style="max-height: 400px; object-fit: cover;"
+     class="image-top">
+
+        <div class="card-body">
+
+            <!-- Thumbnails -->
+            <!-- <div class="thumbnails mb-3">
+                <img src="https://mediacomputereg.com/wp-content/uploads/2024/05/Untitled-2-24.png" width="20%"
+                    class="small-img" alt="">
+                <img src="https://mediacomputereg.com/wp-content/uploads/2024/05/Untitled-2-24.png" width="20%"
+                    class="small-img" alt="">
+                <img src="https://mediacomputereg.com/wp-content/uploads/2024/05/Untitled-2-24.png" width="20%"
+                    class="small-img" alt="">
+            </div> -->
+
+            <!-- Title -->
+            <h5 class="card-title">{{ product.name }}</h5>
+
+            <!-- Description -->
+            <p class="card-text">{{ product.description }}</p>
+
+            <!-- Price -->
+            <p class="price">
+                <span class="old-price">{{ product.oldPrice | currency:'EGP' }}</span>
+                {{ product.price | currency:'EGP' }}
+            </p>
+
+            <!-- Rating -->
+            <div class="rating mb-3">
+                ★★★★☆
+            </div>
+
+            <!-- Favorite Button -->
+            <div class="d-grid gap-2">
+
+
+
+                <button class="btn btn-dark" (click)="addToCart()">
+                    <i class="fa fa-shopping-cart me-1" ></i> Add to Cart
+                </button>
+
+
+
+                <!-- Action Buttons -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <button class="btn btn-outline-primary">
+                        <i class="fa fa-bookmark me-1"></i> Add to Wishlist
+                    </button>
+                    <button class="btn btn-outline-success" [routerLink]="['/details' , product.id  ]">
+                        <i class="fa fa-bookmark me-1" ></i> Details
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>

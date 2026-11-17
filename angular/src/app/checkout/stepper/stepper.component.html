@@ -1,0 +1,120 @@
+<mat-stepper class="checkout-stepper" [linear]="true" #stepper>
+
+  <!-- STEP 1: ADDRESS -->
+  <mat-step [stepControl]="Address">
+    <form [formGroup]="Address">
+
+      <ng-template matStepLabel>Shipping Address</ng-template>
+
+      <div class="form-grid">
+
+        <mat-form-field appearance="outline">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Street</mat-label>
+          <input matInput formControlName="street" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>City</mat-label>
+          <input matInput formControlName="city" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>State</mat-label>
+          <input matInput formControlName="state" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Zip Code</mat-label>
+          <input matInput formControlName="zipCode" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Country</mat-label>
+          <input matInput formControlName="country" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Postal Code</mat-label>
+          <input matInput formControlName="postalCode" required>
+        </mat-form-field>
+
+      </div>
+
+      <div class="actions">
+        <button mat-raised-button color="primary" matStepperNext>
+          Next
+        </button>
+      </div>
+
+    </form>
+  </mat-step>
+
+  <!-- STEP 2: DELIVERY -->
+  <mat-step [stepControl]="deliverMethod">
+
+    <ng-template matStepLabel>Delivery Method</ng-template>
+
+    <app-deliverymethod [delivery]="deliverMethod"></app-deliverymethod>
+
+    <div class="actions">
+      <button mat-button matStepperPrevious>
+        Back
+      </button>
+
+      <button mat-raised-button color="primary"
+              matStepperNext
+              [disabled]="deliverMethod.invalid">
+        Next
+      </button>
+    </div>
+
+  </mat-step>
+
+  <!-- STEP 3: CONFIRMATION -->
+  <mat-step>
+
+    <ng-template matStepLabel>Confirmation</ng-template>
+
+    <div class="done-step">
+      <h3>Order Ready</h3>
+      <p>Please confirm your details before payment.</p>
+    </div>
+
+    <div class="actions">
+      <button mat-stroked-button matStepperPrevious>
+        Back
+      </button>
+
+      <button mat-raised-button color="primary" (click)="goToPayment(stepper)">
+  Confirm Order
+</button>
+    </div>
+
+  </mat-step>
+
+  <!-- STEP 4: PAYMENT -->
+  <mat-step>
+
+    <ng-template matStepLabel>Payment</ng-template>
+
+    <app-payment [deliveryMethodId]="deliverMethod" [address]="Address"></app-payment>
+
+    <div class="actions">
+      <button mat-button matStepperPrevious>
+        Back
+      </button>
+    </div>
+
+  </mat-step>
+
+</mat-stepper>

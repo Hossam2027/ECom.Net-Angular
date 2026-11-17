@@ -1,0 +1,31 @@
+.success-card {
+  max-width: 600px;
+  border-radius: 20px;
+}
+
+.success-icon {
+  font-size: 100px;
+  color: #28a745;
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  80% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.btn-success {
+  border-radius: 30px;
+  padding: 12px 30px;
+}

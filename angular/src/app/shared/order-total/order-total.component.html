@@ -1,0 +1,38 @@
+<div class="totals">
+
+  <!-- Items List -->
+  <div class="total-row" *ngFor="let item of basket?.items">
+    <span>
+      {{ item.name }} ({{ item.quantity }})
+    </span>
+    <span>
+      {{ item.price * item.quantity | currency:'EGP':'symbol':'1.2-2' }}
+    </span>
+  </div>
+
+  <!-- Subtotal -->
+  <div class="total-row">
+    <span>Subtotal ({{ basket?.items?.length }} items)</span>
+    <span>{{ getSubTotal() | currency:'EGP':'symbol':'1.2-2' }}</span>
+  </div>
+
+  <!-- Shipping -->
+  <div class="total-row">
+    <span>Shipping</span>
+    <span>{{ shippingPrice | currency:'EGP':'symbol':'1.2-2' }}</span>
+  </div>
+
+  <!-- Total -->
+  <div class="total-row grand-total">
+    <span>Total</span>
+    <span>{{ getTotal() | currency:'EGP':'symbol':'1.2-2' }}</span>
+  </div>
+
+  <button
+    *ngIf="showCheckoutButton"
+    routerLink="/checkout"
+    class="checkout-btn">
+    Checkout
+  </button>
+
+</div>

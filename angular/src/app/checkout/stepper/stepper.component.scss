@@ -1,0 +1,33 @@
+.checkout-stepper {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.full-width {
+  grid-column: span 2;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.done-step {
+  text-align: center;
+  padding: 30px;
+}
+
+.success-icon {
+  font-size: 60px;
+  color: #28a745;
+  margin-bottom: 10px;
+}

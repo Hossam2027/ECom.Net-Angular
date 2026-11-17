@@ -1,0 +1,136 @@
+<div class="container my-5">
+    <div class="row">
+
+        <!-- صورة المنتج -->
+        <div class="col-md-5">
+            <div class="main-img">
+                <!-- <img [src]="'https://hossammohammed.runasp.net/images/products/' + product.photos[0]?.imageName"  -->
+                <img [src]="'https://localhost:44344/images/products/' + product.photos[0]?.imageName"
+                     class="w-100 rounded shadow-sm" 
+                     alt="{{product.name}}">
+            </div>
+        </div>
+
+        <!-- تفاصيل المنتج -->
+        <div class="col-md-7">
+            <div class="main-description px-2">
+
+                <div class="category text-bold text-muted">
+                    Category: {{product.categoryName}}
+                </div>
+
+                <h2 class="product-title text-bold my-3">
+                    {{product.name}}
+                </h2>
+
+                <div class="price-area my-4">
+                    <p class="old-price mb-1">
+                        <del>{{ product?.oldPrice | currency:'EGP' }}</del>
+                        <span class="old-price-discount text-danger ms-2">
+                            <!-- يمكنك إضافة نسبة الخصم هنا -->
+                        </span>
+                    </p>
+
+                    <p class="new-price fw-bold fs-3 mb-0 text-success">
+                        {{ product?.newPrice | currency:'EGP' }}
+                    </p>
+                </div>
+
+                <!-- الكمية -->
+                <div class="d-flex align-items-center gap-3 my-4">
+                    <p class="mb-0 fw-bold">Quantity:</p>
+                    <!-- <div class="d-flex gap-2">
+                        <button class="btn btn-outline-danger fw-bold" (click)="decrementQuantity()">−</button>
+                        <span class="fs-4 fw-bold px-3 align-self-center">{{ quantity }}</span>
+                        <button class="btn btn-outline-success fw-bold" (click)="incrementQuantity()">+</button>
+                    </div> -->
+                </div>
+
+                <!-- أزرار الإجراءات -->
+
+                <div class="buttons d-flex flex-wrap gap-3 my-5">
+
+                    <button class="btn custom-btn shadow" >
+                        <i class="fa fa-heart"></i> Wishlist
+                    </button>
+
+                    <button class="btn custom-btn shadow" >
+                        <i class="fa fa-shopping-cart"></i> Add to Cart
+                    </button>
+
+                    <button routerLink="/shop" class="btn custom-btn shadow">
+                        <i class="fa fa-shopping-bag"></i> Continue Shopping
+                    </button>
+
+                    <div class="ms-auto">
+                        <input type="number" 
+                               class="form-control text-center" 
+                               min="1" 
+                               style="width: 80px;">
+                    </div>
+                </div> 
+
+            </div>
+        </div>
+    </div>
+
+    <!-- تفاصيل المنتج -->
+    <div class="product-details my-5">
+        <h5 class="details-title text-color mb-2">Product Details</h5>
+        <p class="description">{{ product.description }}</p>
+
+        <h5 class="details-title text-color mb-2 mt-4">Product Description</h5>
+        <p class="description">{{ product.description }}</p>
+    </div>
+
+    <!-- Delivery Info -->
+    <div class="delivery my-4">
+        <p class="font-weight-bold mb-1">
+            <i class="fa fa-truck me-2"></i> 
+            <b>Delivery done in 3 days from date of purchase</b>
+        </p>
+        <p class="text-secondary">Order now to get this product delivered quickly.</p>
+    </div>
+
+    <div class="delivery-options my-4">
+        <p class="font-weight-bold mb-1">
+            <i class="fa fa-filter me-2"></i> 
+            <b>Delivery Options</b>
+        </p>
+        <p class="text-secondary">View available delivery options here.</p>
+    </div>
+
+</div>
+
+<!-- Loading -->
+@if (loading) {
+    <div class="loader text-center my-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2">Loading...</p>
+    </div>
+}
+
+<!-- Reviews -->
+<div class="container my-5">
+    <h4 *ngIf="reviews.length > 0" class="mb-4">Product Reviews</h4>
+    
+    <div class="row">
+        @for (item of reviews; track $index) {
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="review-card rounded p-4 shadow-sm border h-100">
+                    <div class="d-flex align-items-center mb-3">
+                        <img src="https://static.vecteezy.com/system/resources/previews/015/271/883/original/business-man-flat-icon-design-human-resource-and-businessman-icon-concept-man-icon-in-trendy-flat-style-symbol-for-your-web-site-design-logo-app-vector.jpg"
+                             width="55" 
+                             class="rounded-circle me-3" 
+                             alt="User">
+                        <div>
+                            <h6 class="mb-0 text-info">{{ item.userName }}</h6>
+                            <small class="text-muted">{{ item.reviewTime | date:'medium' }}</small>
+                        </div>
+                    </div>
+                    <p class="review-text mb-0">{{ item.content }}</p>
+                </div>
+            </div>
+        }
+    </div>
+</div>
